@@ -1,4 +1,8 @@
-package cardGame;
+//Angel Grajeda-Cervantes
+//Andreas Hitt
+//Jared Lee
+//1/28/25
+//package cardGame;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,8 +29,7 @@ public class CardGame {
 		while(input.hasNext()) {
 			String[] fields  = input.nextLine().split(",");
 			//	public Card(String cardSuit, String cardName, int cardValue, String cardPicture) {
-			Card newCard = new Card(fields[0], fields[1].trim(),
-					Integer.parseInt(fields[2].trim()), fields[3]);
+			Card newCard = new Card(fields[0], fields[1].trim(), Integer.parseInt(fields[2].trim()), fields[3]);
 			deckOfCards.add(newCard);	
 		}
 
@@ -44,8 +47,33 @@ public class CardGame {
 		for(Card c: playerCards)
 			System.out.println(c);
 
-		System.out.println("pairs is " + checkFor2Kind());
+		
+		//System.out.println("pairs is " + checkFor2Kind());
 
+		//sum all of the values in the player's deck 
+		//chatgpt helped us figure out how to read from playerCards 
+		int sum = 0;
+		for(int i= 0; i < playerCards.size(); i++) { 
+			sum += playerCards.get(i).getValue();
+		}
+		System.out.println("Sum of card values: " + sum);
+
+		//check if the sum is a prime number 
+		boolean isPrime = true;
+		for (int i = 2; i <= Math.sqrt(sum); i++) {
+			if (sum % i == 0){
+				System.out.print(i + " ");
+				isPrime = false;
+				break;
+			}
+		}
+
+		if(isPrime){
+			System.out.println(" The summation is a prime number!");
+		} else {
+			System.out.println(" The summation is not a prime number.");
+		}
+	
 	}//end main
 
 	public static void shuffle() {
@@ -58,7 +86,7 @@ public class CardGame {
 			deckOfCards.add(c);
 		}
 	}
-
+	/* commenting out the two of a kind code due to not being functional
 	//check for 2 of a kind in the players hand
 	public static boolean checkFor2Kind() {
 
@@ -80,4 +108,5 @@ public class CardGame {
 		}//end outer for
 		return false;
 	}
+	*/
 }//end class
